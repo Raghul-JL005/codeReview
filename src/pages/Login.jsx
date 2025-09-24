@@ -8,8 +8,8 @@ import { loginUser } from "../logic/authLogic";
 import "./Login.css";
 
 export default function Login() {
-  const [emailOrPhoneNumber, setEmailOrPhoneNumber] = useState("");
-  const [password, setPassword] = useState("");
+  const [emailOrPhoneNumber, setEmailOrPhoneNumber] = useState("superadmin@gmail.com");
+  const [password, setPassword] = useState("Hari@123");
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
