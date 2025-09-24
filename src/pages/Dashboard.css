@@ -1,0 +1,50 @@
+.dashboard-container {
+    padding: 40px;
+    min-height: 100vh;
+    background: linear-gradient(135deg, #f5f7fa, #c3cfe2);
+    font-family: 'Roboto', sans-serif;
+}
+
+.dashboard-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 30px;
+}
+
+.dashboard-title {
+    font-weight: 700;
+    color: #333;
+}
+
+.logout-button {
+    background: #667eea;
+    color: white;
+    font-weight: 600;
+    border-radius: 8px;
+    padding: 10px 20px;
+    transition: background 0.3s ease;
+}
+
+.logout-button:hover {
+    background: #5a67d8;
+}
+
+.category-grid {
+    margin-top: 20px;
+}
+
+.category-card {
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    border-radius: 12px;
+    overflow: hidden;
+}
+
+.category-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
+}
+
+.category-image {
+    object-fit: cover;
+}
