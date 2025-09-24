@@ -1,4 +1,4 @@
-import { getCategoriesApi } from "../api/authApi";
+import { getCategoriesApi } from "../api/AuthApi";
 
 export const fetchCategories = async () => {
   try {

@@ -4,7 +4,7 @@ import TextField from "@mui/material/TextField";
 import Typography from "@mui/material/Typography";
 import CircularProgress from "@mui/material/CircularProgress";
 import CommonButton from "../components/CommonButton";
-import { loginUser } from "../logic/authLogic";
+import { loginUser } from "../logic/AuthLogic";
 import "./Login.css";
 
 export default function Login() {

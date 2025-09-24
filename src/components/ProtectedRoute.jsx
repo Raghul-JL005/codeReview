@@ -1,6 +1,6 @@
 
 import { Navigate } from "react-router-dom";
-import { isLoggedIn } from "../logic/authLogic";
+import { isLoggedIn } from "../logic/AuthLogic";
 
 export default function ProtectedRoute({ children }) {
     if (!isLoggedIn()) {

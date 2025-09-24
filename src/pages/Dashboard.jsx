@@ -7,7 +7,7 @@ import Card from "@mui/material/Card";
 import CardContent from "@mui/material/CardContent";
 import CardMedia from "@mui/material/CardMedia";
 import CommonButton from "../components/CommonButton";
-import { logoutUser } from "../logic/authLogic";
+import { logoutUser } from "../logic/AuthLogic";
 import { fetchCategories } from "../logic/categoryLogic";
 import { useNavigate } from "react-router-dom";
 import "./Dashboard.css";
