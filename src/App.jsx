@@ -2,6 +2,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Login from "./pages/Login";
 import Dashboard from "./pages/Dashboard";
 import ProtectedRoute from "./components/ProtectedRoute";
+import ReusableData from "./pages/ReusableData";
 
 export default function App() {
   return (
@@ -13,6 +14,14 @@ export default function App() {
           element={
             <ProtectedRoute>
               <Dashboard />
+            </ProtectedRoute>
+          }
+        />
+         <Route
+          path="/reusableData"
+          element={
+            <ProtectedRoute>
+              <ReusableData />
             </ProtectedRoute>
           }
         />

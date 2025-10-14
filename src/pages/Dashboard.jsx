@@ -1,41 +1,43 @@
-import { useEffect, useState } from "react";
-import Box from "@mui/material/Box";
-import Typography from "@mui/material/Typography";
-import CircularProgress from "@mui/material/CircularProgress";
-import Grid from "@mui/material/Grid";
-import Card from "@mui/material/Card";
-import CardContent from "@mui/material/CardContent";
-import CardMedia from "@mui/material/CardMedia";
-import CommonButton from "../components/CommonButton";
-import { logoutUser } from "../logic/AuthLogic";
-import { fetchCategories } from "../logic/categoryLogic";
-import { useNavigate } from "react-router-dom";
-import "./Dashboard.css";
 
-export default function Dashboard() {
+import React, { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
+import { fetchCategories } from "../features/category/categoryThunks";
+import CommonButton from "../components/CommonButton";
+
+import {
+  Grid,
+  Card,
+  CardContent,
+  CardMedia,
+  Typography,
+  CircularProgress,
+} from "@mui/material";
+
+import "./Dashboard.css";
+import { logout } from "../features/auth/authSlice";
+
+const Dashboard = () => {
+  const dispatch = useDispatch();
   const navigate = useNavigate();
-  const [categories, setCategories] = useState([]);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState("");
+
+  // Get state from Redux
+  const { categories, loading, error } = useSelector((state) => state.category);
 
   useEffect(() => {
-    const load = async () => {
-      try {
-        const data = await fetchCategories();
-        setCategories(data);
-      } catch (err) {
-        setError(err.message);
-      } finally {
-        setLoading(false);
-      }
-    };
-    load();
-  }, []);
+    dispatch(fetchCategories());
+  }, [dispatch]);
 
   const handleLogout = () => {
-    logoutUser();
+    logout();
     navigate("/", { replace: true });
   };
+const handleReusablePage = () => {
+    
+    navigate("/reusableData");
+  };
+  if (loading) return <CircularProgress />;
+  if (error) return <Typography color="error">{error}</Typography>;
 
   return (
     <div className="dashboard-container">
@@ -46,34 +48,38 @@ export default function Dashboard() {
         <CommonButton className="logout-button" onClick={handleLogout}>
           Logout
         </CommonButton>
+        <CommonButton className="logout-button" onClick={handleReusablePage}>
+          Reuseable page
+        </CommonButton>
       </div>
 
-      {loading && <CircularProgress />}
-      {error && <Typography color="error">{error}</Typography>}
-
-      {!loading && !error && (
-        <Grid container spacing={3} className="category-grid">
-          {categories.map((cat) => (
-            <Grid item xs={12} sm={6} md={4} key={cat.categoryId}>
+      <Grid container spacing={3}>
+        {categories && categories.length > 0 ? (
+          categories.map((category) => (
+            <Grid item xs={12} sm={6} md={4} key={category.categoryId}>
               <Card className="category-card">
                 <CardMedia
                   component="img"
                   height="160"
-                  image={`https://ttdc.skeintech.com:8001/valueStreaks/buttons/getS3Details?key=${cat.categoryImage}`}
-                  alt={cat.categoryName}
+                  image={`https://ttdc.skeintech.com:8001/valueStreaks/buttons/getS3Details?key=${category.categoryImage}`}
+                  alt={category.categoryName}
                   className="category-image"
                 />
                 <CardContent>
-                  <Typography variant="h6">{cat.categoryName}</Typography>
+                  <Typography variant="h6">{category.categoryName}</Typography>
                   <Typography variant="body2" color="text.secondary">
-                    {cat.shortDescription}
+                    {category.shortDescription}
                   </Typography>
                 </CardContent>
               </Card>
             </Grid>
-          ))}
-        </Grid>
-      )}
+          ))
+        ) : (
+          <Typography>No categories found</Typography>
+        )}
+      </Grid>
     </div>
   );
-}
+};
+
+export default Dashboard;

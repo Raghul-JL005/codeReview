@@ -1,4 +1,4 @@
-import { getCategoriesApi } from "../api/AuthApi";
+import { getCategoriesApi } from "../api/apiServies";
 
 export const fetchCategories = async () => {
   try {
@@ -8,3 +8,7 @@ export const fetchCategories = async () => {
     throw new Error(err.response?.data?.message || "Failed to fetch categories");
   }
 };
+
+
+
+

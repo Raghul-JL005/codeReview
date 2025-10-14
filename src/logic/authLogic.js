@@ -1,4 +1,4 @@
-import { loginApi } from "../api/AuthApi";
+import { loginApi } from "../api/apiServies";
 
 export const loginUser = async (emailOrPhoneNumber, password) => {
   if (!emailOrPhoneNumber || !password) throw new Error("email and password are required");
